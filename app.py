@@ -171,7 +171,7 @@ with tab_may:
 # 🔵 TAB: GIỜ THỞ OXY
 # ===============================
 with tab_oxy:
-    st.subheader("🔵 Tính GIỜ THỞ OXY (giờ thẳng)")
+    st.subheader("🔵 Tính GIỜ THỞ OXY ")
 
     st.markdown("Nhập giờ dạng: `09h15`, `13:30`, `22h`, `24:00` …")
 
