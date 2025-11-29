@@ -18,7 +18,7 @@ st.markdown(
     """
 )
 
-tab_may, tab_oxy = st.tabs(["🔴 Giờ thở máy + ngày giường", "🔵 Giờ thở oxy"])
+tab_may, tab_oxy = st.tabs(["⏰ Giờ thở máy + ngày giường", "⏰ Giờ thở oxy"])
 
 
 # =========================
@@ -130,7 +130,7 @@ with tab_may:
             st.markdown(
                 f"""
                 <div style='text-align:center; padding:18px; border:2px solid red;
-                border-radius:14px; background-color:#fff0f0;'>
+                border-radius:14px; background-color:#FFA500;'>
                     <div style='font-size:22pxcolor; #0066FF !important; font-weight:600;'>⏰ Tổng thời gian thở máy</div>
                     <div style='font-size:34px; font-weight:bold; color:red;'>
                         {tong_gio:.2f} GIỜ ({tong_phut} phút)
