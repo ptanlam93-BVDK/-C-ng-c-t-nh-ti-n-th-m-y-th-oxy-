@@ -199,12 +199,12 @@ with tab_oxy:
                 <div style='text-align:center; padding:18px; border:2px solid red;
                 border-radius:14px; background-color:#1E90FF;'>
                     <div style='font-size:22px;'>🕒 "Tổng thời gian thở oxy"</div>
-                    <div style='font-size:34px; font-weight:bold; color:red;'>
+                    <div style='font-size:34px; font-weight:bold; color:orange;'>
                         {tong_gio_oxy:.2f} GIỜ ({tong_phut_oxy} phút)
                     </div>
                     <br>
                     <div style='font-size:22px;'>⏰ Giờ oxy</div>
-                    <div style='font-size:42px; font-weight:bold; color:red;'>
+                    <div style='font-size:42px; font-weight:bold; color:orange;'>
                         {ket_qua_oxy}
                     </div>
                 </div>
