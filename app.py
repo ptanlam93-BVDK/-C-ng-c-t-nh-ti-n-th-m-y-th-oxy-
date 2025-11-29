@@ -9,20 +9,20 @@ st.set_page_config(
     layout="centered"
 )
 
-st.title("💻 Công cụ tính giờ thở máy / thở oxy cho điều dưỡng")
+st.title("🧮 Công cụ tính giờ thở máy / thở oxy cho điều dưỡng")
 
 st.markdown(
     """
     Công cụ này chỉ dùng để **tính toán và hiển thị kết quả**, không lưu dữ liệu.  
-    Hỗ trợ sử dụng **Qui đổi thời gian nhanh**.
+    Hỗ trợ sử dụng ** Qui đổi nhanh thời gian **.
 
-    **Được tạo bởi:** CNĐD **Phan Tấn Lãm**  
+    **Được xây dựng bởi:** CNĐD **Phan Tấn Lãm**  
     **Đơn vị:** Khoa Hồi sức tích cực - Chống độc,  
     **Bệnh viện:** 🏥 Bệnh viện Đa khoa Đồng Tháp.
     """
 )
 
-tab_may, tab_oxy = st.tabs(["⏰ Giờ thở máy + ngày giường", "🧭 Giờ thở oxy"])
+tab_may, tab_oxy = st.tabs(["⏰ Giờ thở máy + ngày giường", "⏰ Giờ thở oxy"])
 
 
 # =========================
