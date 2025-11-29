@@ -3,9 +3,13 @@ import streamlit as st
 # =========================
 # CẤU HÌNH & GIỚI THIỆU
 # =========================
-st.set_page_config(page_title="Công cụ tính giờ thở máy/thở oxy", layout="centered")
+st.set_page_config(
+    page_title="Công cụ tính giờ thở máy/thở oxy",
+    page_icon="favicon_bvdk.ico",
+    layout="centered"
+)
 
-st.title("🧮 Công cụ tính giờ thở máy / thở oxy cho điều dưỡng")
+st.title(" Công cụ tính giờ thở máy / thở oxy cho điều dưỡng")
 
 st.markdown(
     """
