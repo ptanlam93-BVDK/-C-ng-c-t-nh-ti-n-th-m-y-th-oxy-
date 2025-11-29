@@ -3,18 +3,14 @@ import streamlit as st
 # =========================
 # CẤU HÌNH & GIỚI THIỆU
 # =========================
-st.set_page_config(
-    page_title="Công cụ tính giờ thở máy/thở oxy",
-    page_icon="favicon_bvdk.ico",
-    layout="centered"
-)
+st.set_page_config(page_title="Công cụ tính giờ thở máy/thở oxy", layout="centered")
 
-st.title("🧮 Công cụ tính giờ thở máy / thở oxy cho điều dưỡng")
+st.title("💻 Công cụ tính giờ thở máy / thở oxy cho điều dưỡng")
 
 st.markdown(
     """
     Công cụ này chỉ dùng để **tính toán và hiển thị kết quả**, không lưu dữ liệu.  
-    Hỗ trợ sử dụng ** Qui đổi nhanh thời gian **.
+    Hỗ trợ sử dụng ** Qui đổi thời gian **.
 
     **Được xây dựng bởi:** CNĐD **Phan Tấn Lãm**  
     **Đơn vị:** Khoa Hồi sức tích cực - Chống độc,  
@@ -22,7 +18,7 @@ st.markdown(
     """
 )
 
-tab_may, tab_oxy = st.tabs(["⏰ Giờ thở máy + ngày giường", "⏰ Giờ thở oxy"])
+tab_may, tab_oxy = st.tabs(["🔴 Giờ thở máy + ngày giường", "🔵 Giờ thở oxy"])
 
 
 # =========================
@@ -30,13 +26,15 @@ tab_may, tab_oxy = st.tabs(["⏰ Giờ thở máy + ngày giường", "⏰ Giờ
 # =========================
 def doi_sang_phut(text: str):
     """
-    Nhập được: 09:15, 09h15, 9h15, 9h, 9, 24:00, ...
+    Chấp nhận các dạng:
+    - 09:15
+    - 09h15 / 9h15 / 9H15
+    - 9h / 9H / 9
+    Có thể thêm 'phút', 'phut', 'p' ở cuối (bỏ qua).
     Trả về: (tổng_phút, lỗi)
     """
     try:
         t = text.strip().lower()
-        if not t:
-            return None, "Chưa nhập giờ."
 
         # bỏ hậu tố phút
         for suffix in ["phút", "phut", "p", "’", "'"]:
@@ -90,7 +88,7 @@ def tinh_phut(t_bd: str, t_kt: str):
 
 
 # ===============================
-# 🔴 TAB: GIỜ THỞ MÁY + NGÀY GIƯỜNG
+# ⏰ TAB: GIỜ THỞ MÁY + NGÀY GIƯỜNG
 # ===============================
 with tab_may:
     st.subheader("💊 Tính GIỜ THỞ MÁY và NGÀY GIƯỜNG")
@@ -103,19 +101,22 @@ with tab_may:
     with col2:
         kt_may = st.text_input("Giờ kết thúc thở máy", placeholder="VD: 24:00")
 
+    # NÚT BẤM TÍNH GIỜ THỞ MÁY
     if st.button("✅ TÍNH GIỜ THỞ MÁY"):
         tong_phut, err = tinh_phut(bd_may, kt_may)
 
         if err:
             st.error("⛔ " + err)
         else:
+            # Tổng giờ thở máy
             tong_gio = tong_phut / 60
+            # Quy đổi theo 24h
             ket_qua = round(tong_gio / 24, 3)
 
-            # PHÂN LOẠI NGÀY GIƯỜNG
+            # PHÂN LOẠI NGÀY GIƯỜNG THEO KẾT QUẢ
             if ket_qua < 0.3:
                 loai_text = "1 ngày giường HSCC"
-                tomtat_color = "#4da6ff"   # xanh dương
+                tomtat_color = "#4da6ff"   # xanh
             elif 0.3 <= ket_qua <= 0.8:
                 loai_text = "0.5 ngày HSCC + 0.5 ngày HSTC"
                 tomtat_color = "#ffa500"   # cam
@@ -125,41 +126,27 @@ with tab_may:
 
             st.markdown("---")
 
-            # KHUNG KẾT QUẢ: TIÊU ĐỀ XANH DƯƠNG, SỐ ĐỎ
-      st.markdown(
-    f"""
-    <div style="text-align:center;
-                padding:18px;
-                border:2px solid red;
-                border-radius:14px;
-                background-color:#fff0f0;">
-      <p style="font-size:22px;
-                color:#0066FF;
-                font-weight:600;">
-        🕒 Tổng thời gian thở máy
-      </p>
-      <p style="font-size:34px;
-                font-weight:bold;
-                color:red;">
-        {tong_gio:.2f} GIỜ ({tong_phut} phút)
-      </p>
-      <br>
-      <p style="font-size:22px;
-                color:#0066FF;
-                font-weight:600;">
-        💵 Kết quả quy đổi /24
-      </p>
-      <p style="font-size:42px;
-                font-weight:bold;
-                color:red;">
-        {ket_qua}
-      </p>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+            # HỘP KẾT QUẢ GIỜ THỞ MÁY + /24
+            st.markdown(
+                f"""
+                <div style='text-align:center; padding:18px; border:2px solid red;
+                border-radius:14px; background-color:#fff0f0;'>
+                    <div style='font-size:22pxcolor; #0066FF !important; font-weight:600;'>⏰ Tổng thời gian thở máy</div>
+                    <div style='font-size:34px; font-weight:bold; color:red;'>
+                        {tong_gio:.2f} GIỜ ({tong_phut} phút)
+                    </div>
+                    <br>
+                    <div style='font-size:22px color; #0066FF !important; font-weight:600;'>🛃�
+            Kết quả quy đổi /24</div>
+                    <div style='font-size:42px; font-weight:bold; color:red;'>
+                        {ket_qua}
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
 
-            # TÓM TẮT NHANH NGÀY GIƯỜNG
+            # TÓM TẮT NHANH NGÀY GIƯỜNG (GIỐNG VÙNG TÓM TẮT)
             st.markdown("---")
             st.subheader("📌 Tóm tắt nhanh – Ngày giường thở máy")
 
@@ -194,6 +181,7 @@ with tab_oxy:
     with col4:
         kt_oxy = st.text_input("Giờ kết thúc thở oxy", placeholder="VD: 24:00", key="oxy_kt")
 
+    # NÚT BẤM TÍNH GIỜ THỞ OXY
     if st.button("✅ TÍNH GIỜ THỞ OXY"):
         tong_phut_oxy, err_oxy = tinh_phut(bd_oxy, kt_oxy)
 
@@ -205,50 +193,20 @@ with tab_oxy:
 
             st.markdown("---")
 
+            # HỘP KẾT QUẢ GIỜ OXY
             st.markdown(
                 f"""
-                <div style='
-                    text-align:center;
-                    padding:18px;
-                    border:2px solid red;
-                    border-radius:14px;
-                    background-color:#fff0f0;
-                '>
-
-                    <div style='
-                        font-size:22px;
-                        color:#0066FF !important;
-                        font-weight:600;
-                    '>
-                        🕒 Tổng thời gian thở oxy
-                    </div>
-
-                    <div style='
-                        font-size:34px;
-                        font-weight:bold;
-                        color:red;
-                    '>
+                <div style='text-align:center; padding:18px; border:2px solid red;
+                border-radius:14px; background-color:#fff0f0;'>
+                    <div style='font-size:22px;'>🕒 Tổng thời gian thở oxy</div>
+                    <div style='font-size:34px; font-weight:bold; color:red;'>
                         {tong_gio_oxy:.2f} GIỜ ({tong_phut_oxy} phút)
                     </div>
-
                     <br>
-
-                    <div style='
-                        font-size:22px;
-                        color:#0066FF !important;
-                        font-weight:600;
-                    '>
-                        📘 Giờ oxy (giờ thẳng)
-                    </div>
-
-                    <div style='
-                        font-size:42px;
-                        font-weight:bold;
-                        color:red;
-                    '>
+                    <div style='font-size:22px;'>📘 Giờ oxy (giờ thẳng)</div>
+                    <div style='font-size:42px; font-weight:bold; color:red;'>
                         {ket_qua_oxy}
                     </div>
-
                 </div>
                 """,
                 unsafe_allow_html=True
