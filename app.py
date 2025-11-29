@@ -9,20 +9,20 @@ st.set_page_config(
     layout="centered"
 )
 
-st.title(" Công cụ tính giờ thở máy / thở oxy cho điều dưỡng")
+st.title("💻 Công cụ tính giờ thở máy / thở oxy cho điều dưỡng")
 
 st.markdown(
     """
     Công cụ này chỉ dùng để **tính toán và hiển thị kết quả**, không lưu dữ liệu.  
-    Hỗ trợ sử dụng **tính nhanh**.
+    Hỗ trợ sử dụng **tính nhanh ⏰**.
 
-    **Được xây dựng bởi:** CNĐD **Phan Tấn Lãm**  
+    **Được tạo bởi:** CNĐD.**Phan Tấn Lãm**  🏪
     **Đơn vị:** Khoa Hồi sức tích cực - Chống độc,  
-    **Bệnh viện:** Bệnh viện Đa khoa Đồng Tháp.
+    **Bệnh viện:** 🏥 Bệnh viện Đa khoa Đồng Tháp.
     """
 )
 
-tab_may, tab_oxy = st.tabs(["🔴 Giờ thở máy + ngày giường", "🔵 Giờ thở oxy"])
+tab_may, tab_oxy = st.tabs([" ⏰ Giờ thở máy + ngày giường", " 🧭 Giờ thở oxy"])
 
 
 # =========================
@@ -92,10 +92,10 @@ def tinh_phut(t_bd: str, t_kt: str):
 
 
 # ===============================
-# 🔴 TAB: GIỜ THỞ MÁY + NGÀY GIƯỜNG
+# 🛃 TAB: GIỜ THỞ MÁY + NGÀY GIƯỜNG
 # ===============================
 with tab_may:
-    st.subheader("🔴 Tính GIỜ THỞ MÁY và NGÀY GIƯỜNG")
+    st.subheader("💊 Tính GIỜ THỞ MÁY và NGÀY GIƯỜNG")
 
     st.markdown("Nhập giờ dạng: `09h15`, `13:40`, `22h`, `24:00` …")
 
@@ -106,7 +106,7 @@ with tab_may:
         kt_may = st.text_input("Giờ kết thúc thở máy", placeholder="VD: 24:00")
 
     # NÚT BẤM TÍNH GIỜ THỞ MÁY
-    if st.button("✅ TÍNH GIỜ THỞ MÁY"):
+    if st.button("🛂 TÍNH GIỜ THỞ MÁY"):
         tong_phut, err = tinh_phut(bd_may, kt_may)
 
         if err:
@@ -135,12 +135,12 @@ with tab_may:
                 f"""
                 <div style='text-align:center; padding:18px; border:2px solid red;
                 border-radius:14px; background-color:#fff0f0;'>
-                    <div style='font-size:22px;'>🕒 Tổng thời gian thở máy</div>
+                    <div style='font-size:22px;'>⏰ Tổng thời gian thở máy</div>
                     <div style='font-size:34px; font-weight:bold; color:red;'>
                         {tong_gio:.2f} GIỜ ({tong_phut} phút)
                     </div>
                     <br>
-                    <div style='font-size:22px;'>📘 Kết quả quy đổi /24</div>
+                    <div style='font-size:22px;'>💵 Kết quả quy đổi /24</div>
                     <div style='font-size:42px; font-weight:bold; color:red;'>
                         {ket_qua}
                     </div>
@@ -151,7 +151,7 @@ with tab_may:
 
             # TÓM TẮT NHANH NGÀY GIƯỜNG (GIỐNG VÙNG TÓM TẮT)
             st.markdown("---")
-            st.subheader("📌 Tóm tắt nhanh – Ngày giường thở máy")
+            st.subheader("🏥 Tóm tắt nhanh – Ngày giường thở máy")
 
             st.markdown(
                 f"""
@@ -171,7 +171,7 @@ with tab_may:
 
 
 # ===============================
-# 🔵 TAB: GIỜ THỞ OXY
+# 🛃 TAB: GIỜ THỞ OXY
 # ===============================
 with tab_oxy:
     st.subheader("🔵 Tính GIỜ THỞ OXY (giờ thẳng)")
@@ -189,7 +189,7 @@ with tab_oxy:
         tong_phut_oxy, err_oxy = tinh_phut(bd_oxy, kt_oxy)
 
         if err_oxy:
-            st.error("⛔ " + err_oxy)
+            st.error("⛔️ " + err_oxy)
         else:
             tong_gio_oxy = tong_phut_oxy / 60
             ket_qua_oxy = round(tong_gio_oxy, 2)
@@ -206,7 +206,7 @@ with tab_oxy:
                         {tong_gio_oxy:.2f} GIỜ ({tong_phut_oxy} phút)
                     </div>
                     <br>
-                    <div style='font-size:22px;'>📘 Giờ oxy (giờ thẳng)</div>
+                    <div style='font-size:22px;'>💵 Giờ oxy (giờ thẳng)</div>
                     <div style='font-size:42px; font-weight:bold; color:red;'>
                         {ket_qua_oxy}
                     </div>
